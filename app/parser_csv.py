@@ -10,9 +10,9 @@ logger = logging.getLogger(__name__)
 def parse_str_to_number(value):
     """Convert string to Int, handling comma-separated decimals."""
     try:
-        return int(str(value).replace(",", "."))
-    except InvalidOperation:
-        return value
+        return int(str(value).replace(",", ""))
+    except (InvalidOperation, ValueError):
+        return 0
 
 
 def read_csv_file(path: str, delimiter: str = ";"):
