@@ -32,21 +32,63 @@ This project is designed to provide a comprehensive API for accessing viticultur
 
 ## Getting Started
 
+1. **Install Python 3.11:**Add commentMore actions
+   If you don't have Python 3.11 installed, download it from the [official Python website](https://www.python.org/downloads/) or use a package manager:
 
-1. **Install dependencies:**
+   - **Homebrew (macOS):**
+     ```sh
+     brew install python@3.11
+     ```
+   - **Windows:**
+     Download and run the installer from [python.org](https://www.python.org/downloads/).
+
+   - **Linux (Ubuntu):**
+     ```sh
+     sudo apt-get update
+     sudo apt-get install python3.11 python3.11-venv python3.11-dev
+     ```
+
+2. **Create and activate a virtual environment:**
+   It's recommended to use a virtual environment to manage dependencies.
+
+   ```sh
+   python3.11 -m venv .venv
+   source .venv/bin/activate
+   ```
+
+3. **Install dependencies:**
    ```sh
    pip install -r requirements.txt
    ```
 
-2. **Run the application:**
+4. **Run the application:**
    ```sh
    uvicorn app.main:app --reload
    ```
-3. **Access the API:**
+5. **Access the API:**
    Open your browser and navigate to [http://localhost:8000/docs](http://localhost:8000/docs) to view the interactive API documentation provided by FastAPI.
 
-## Contributing
-Contributions are welcome! If you find a bug or have a feature request, please open an issue or submit a pull request. Make sure to follow the project's coding standards and include tests for new features.
+---
 
-## License
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+## Running with Docker
+
+You can run the application easily using Docker:
+
+1. **Start the application:**
+   ```sh
+   docker compose up --build -d
+   ```
+2. **Access the API:**
+   Open [http://localhost:8000/docs](http://localhost:8000/docs) in your browser.
+
+---
+
+## Running Tests
+
+Automated tests are located in the `tests/` directory. To run the tests, use:
+
+```sh
+pytest
+```
+
+---
