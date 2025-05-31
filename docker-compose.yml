@@ -1,0 +1,14 @@
+services:
+  embrapa-api:
+    build: .
+    container_name: embrapa-api
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./app:/app/app
+      - ./files:/app/files
+    env_file:
+      - .env
+    environment:
+      - PYTHONDONTWRITEBYTECODE=1
+      - PYTHONUNBUFFERED=1
