@@ -32,7 +32,8 @@ This project is designed to provide a comprehensive API for accessing viticultur
 
 ## Getting Started
 
-1. **Install Python 3.11:**Add commentMore actions
+1. **Install Python 3.11:**
+
    If you don't have Python 3.11 installed, download it from the [official Python website](https://www.python.org/downloads/) or use a package manager:
 
    - **Homebrew (macOS):**
@@ -82,6 +83,13 @@ You can run the application easily using Docker:
    Open [http://localhost:8000/docs](http://localhost:8000/docs) in your browser.
 
 ---
+
+## Sequence Diagram
+![alt text](docs/diagram.png "Title")
+
+## Flowchart
+![alt text](docs/diagram2.png "Title")
+
 
 ## Running Tests
 
