@@ -7,15 +7,6 @@ from app.parser_csv import (
 )
 
 
-# Test parse_str_to_number
-def test_parse_str_to_number():
-    assert parse_str_to_number("123") == Decimal("123")
-    assert parse_str_to_number("123.45") == Decimal("123.45")
-    assert parse_str_to_number("123,45") == Decimal("123.45")
-    assert parse_str_to_number("invalid") == "invalid"
-    assert parse_str_to_number("") == ""
-
-
 # Test read_csv_file
 def test_read_csv_file():
     result = read_csv_file("tests/fixtures/general_csv.csv", delimiter=";")
@@ -163,9 +154,31 @@ def test_general_csv():
 # Test import_export_csv
 def test_import_export_csv():
     expected = [
-        {'country': 'África do Sul', 'quantity': 2, 'amount': 44, 'year': 2023},
-        {'country': 'Alemanha', 'quantity': 162, 'amount': 1542, 'year': 2023},
+        {"country": "África do Sul", "quantity": 2, "amount": 44, "year": 2023},
+        {"country": "Alemanha", "quantity": 162, "amount": 1542, "year": 2023},
     ]
 
-    result = import_export_csv("tests/fixtures/import_export_csv.csv", year=2023, delimiter="\t")
+    result = import_export_csv(
+        "tests/fixtures/import_export_csv.csv", year=2023, delimiter="\t"
+    )
     assert result == expected
+
+
+def test_parse_str_to_number_int():
+    assert parse_str_to_number("123") == 123
+    assert parse_str_to_number(456) == 456
+    assert parse_str_to_number("0") == 0
+    assert parse_str_to_number("-789") == -789
+
+
+def test_parse_str_to_number_with_commas():
+    assert parse_str_to_number("1,234") == 1234
+    assert parse_str_to_number("12,345,678") == 12345678
+    assert parse_str_to_number("-9,876") == -9876
+
+
+def test_parse_str_to_number_invalid():
+    assert parse_str_to_number("") == 0
+    assert parse_str_to_number(None) == 0
+    assert parse_str_to_number("*") == 0
+    assert parse_str_to_number("nd") == 0
