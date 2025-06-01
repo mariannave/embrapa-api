@@ -1,5 +1,6 @@
 from app.parser_csv import general_csv, import_export_csv
 from app import scraping
+import os
 
 
 def production_data(year: int = 2023):
@@ -11,7 +12,7 @@ def production_data(year: int = 2023):
         return scraping.parse_html_table(year=year, html_content=html_content)
     else:
         return general_csv(
-            path="/Users/marianna/pos-fiap/projeto/files/producao.csv",
+            path=f"{os.getcwd()}/files/producao.csv",
             year=year,
             key="produto",
         )
@@ -26,7 +27,7 @@ def commercialization_data(year: int = 2023):
         return scraping.parse_html_table(year=year, html_content=html_content)
     else:
         return general_csv(
-            path="/Users/marianna/pos-fiap/projeto/files/comercializacao.csv",
+            path=f"{os.getcwd()}/files/comercializacao.csv",
             year=year,
             key="Produto",
         )
@@ -37,11 +38,12 @@ def processing_data(year: int = 2023, metadata: dict = {}):
     html_content = scraping.get_data(
         url=f"{scraping.SCRAPER_TARGETS['processamento'][category]}&ano={year}"
     )
+
     if html_content:
         return scraping.parse_html_table(year=year, html_content=html_content)
     else:
         return general_csv(
-            path=f"/Users/marianna/pos-fiap/projeto/files/processamento-{category}.csv",
+            path=f"{os.getcwd()}/files/processamento-{category}.csv",
             year=year,
             key="cultivar",
             delimiter=(";" if category == "viniferas" else "\t")
@@ -60,7 +62,7 @@ def import_data(year: int = 2023, metadata: dict = {}):
         )
     else:
         return import_export_csv(
-            path=f"/Users/marianna/pos-fiap/projeto/files/importacao-{category}.csv",
+            path=f"{os.getcwd()}/files/importacao-{category}.csv",
             year=year,
             delimiter=(";" if category == "suco-de-uva" else "\t"),
         )
@@ -71,6 +73,7 @@ def export_data(year: int = 2023, metadata: dict = {}):
     html_content = scraping.get_data(
         url=f"{scraping.SCRAPER_TARGETS['exportacao'][category]}&ano={year}"
     )
+    html_content = None
 
     if html_content:
         return scraping.parse_import_export_table(
@@ -78,7 +81,7 @@ def export_data(year: int = 2023, metadata: dict = {}):
         )
     else:
         return import_export_csv(
-            path=f"/Users/marianna/pos-fiap/projeto/files/exportacao-{category}.csv",
+            path=f"{os.getcwd()}/files/exportacao-{category}.csv",
             year=year,
             delimiter="\t",
         )
